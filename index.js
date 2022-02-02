@@ -14,10 +14,14 @@ const rp = require("request-promise");
 const fs = require("fs");
 
 app.get("/api/items", (req, res) => {
-  fs.readFile("cache.json", (err, data) => {
-    if (err) throw err;
-    let cache = JSON.parse(data);
-    res.json(cache);
+  fs.readFile("cache.json", async (err, data) => {
+    if (err) {
+      await getItemsGenerics();
+    //   res.send("Fetching now...");
+    // } else {
+      let cache = JSON.parse(data)
+      res.json(cache)
+    };
   });
 });
 
@@ -31,14 +35,6 @@ app.get("/api/items/:name", async (req, res) => {
 
 app.get("/api/update", async (req, res) => {
   let items = await getItemsGenerics();
-
-  let cache = {
-    last_update: Date.now(),
-    data: items,
-  };
-
-  let data = JSON.stringify(cache);
-  fs.writeFileSync("cache.json", data);
 
   res.send("ok");
 });
@@ -156,6 +152,14 @@ async function getItemsGenerics() {
       exists = false;
     }
   } while (exists);
+  
+  let cache = {
+    last_update: Date.now(),
+    data: items,
+  };
+
+  let data = JSON.stringify(cache);
+  fs.writeFileSync("cache.json", data);
+
   console.log("Done.")
-  return items;
 }
