@@ -1,20 +1,7 @@
 const express = require("express");
-const rateLimit = require("express-rate-limit");
 const app = express();
 
 require("dotenv").config();
-
-const limiter = rateLimit({
-  windowMs: 1000 * 60 * 60,
-  max: 1000,
-  message: "Limit reached of 1000 requests per hour.",
-});
-
-const updateLimiter = rateLimit({
-  windowMs: 1000 * 60 * 60,
-  max: 1,
-  message: "Limit reached of 1 request per hour.",
-});
 
 const port = process.env.port || 3000;
 
@@ -26,7 +13,7 @@ const cheerio = require("cheerio");
 const rp = require("request-promise");
 const fs = require("fs");
 
-app.get("/api/items", limiter, (req, res) => {
+app.get("/api/items", (req, res) => {
   fs.readFile("cache.json", (err, data) => {
     if (err) throw err;
     let cache = JSON.parse(data);
@@ -34,7 +21,7 @@ app.get("/api/items", limiter, (req, res) => {
   });
 });
 
-app.get("/api/items/:name", limiter, async (req, res) => {
+app.get("/api/items/:name", async (req, res) => {
   let itemName = req.params.name;
 
   let infos = await getItemDetails(("https://minecraftitemids.com/item/" + itemName.toLowerCase()).replace(" ", "-"));
@@ -42,7 +29,7 @@ app.get("/api/items/:name", limiter, async (req, res) => {
   res.json(infos);
 });
 
-app.get("/api/update", updateLimiter, async (req, res) => {
+app.get("/api/update", async (req, res) => {
   let items = await getItemsGenerics();
 
   let cache = {
