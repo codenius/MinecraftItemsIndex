@@ -1,6 +1,18 @@
 {
   "dependencies": {
+    "cheerio": "^1.0.0-rc.9",
+    "dotenv": "^9.0.2",
     "ejs": "^3.1.6",
-    "minecraft-items-api": "github:codenius/minecraft-items-api"
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.2.6",
+    "request-promise": "^4.2.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon --ignore '*.json' --exec 'npm start'"
   }
 }
