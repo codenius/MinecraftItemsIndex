@@ -13,7 +13,7 @@
 <script src="js/loader.js"></script>
 </head>
 
-<body>
+<body>name
 
 <nav>
     <a href="/">MII</a>
@@ -29,6 +29,9 @@
     <li></li>
     <li></li>
 </ul>
+<% if (user) { %>
+    <h2><%= user %></h2>
+  <% } %>
 </body>
 
 </html>

@@ -15,27 +15,25 @@ app.listen(port, () => {
   console.log(`Running on http://localhost:${port}`);
 });
 
+app.engine('.html', require('ejs').__express)
+app.set('view engine', 'ejs')
+app.set('views', 'html')
+// use assets
+app.use('/css', express.static('html/css'))
+app.use('/js', express.static('html/js'))
+app.use('/img', express.static('html/img'))
 
-app.get("/api/items", (req, res) => {
-  fs.readFile("cache.json", async (err, data) => {
-    if (err) {
-      await getItemsGenerics();
-      var data = fs.readFileSync("cache.json")
-    };
-    let cache = JSON.parse(data)
-    res.json(cache)
-  });
-});
+
+var cache = fs.readFileSync("cache.json");
+
+app.get("/:file", (req, res) => {
+  res.render(req.params.file, {user:"ksdagh"})
+})
 
 app.get("/api/items/:name", async (req, res) => {
   let itemName = req.params.name;
   let infos = await getItemDetails(("https://minecraftitemids.com/item/" + itemName.toLowerCase()).replace(" ", "-"));
   res.json(infos);
-});
-
-app.get("/api/update", async (req, res) => {
-  await getItemsGenerics();
-  res.send("ok");
 });
 
 
