@@ -1,43 +1,40 @@
+const cheerio = require("cheerio");
 const express = require("express");
-const app = express();
+const fs = require("fs");
+const rp = require("request-promise");
 
 require("dotenv").config();
-
 const port = process.env.port || 3000;
+
+const app = express();
 
 app.listen(port, () => {
   console.log(`Running on http://localhost:${port}`);
 });
 
-const cheerio = require("cheerio");
-const rp = require("request-promise");
-const fs = require("fs");
 
 app.get("/api/items", (req, res) => {
   fs.readFile("cache.json", async (err, data) => {
     if (err) {
       await getItemsGenerics();
-    //   res.send("Fetching now...");
-    // } else {
-      let cache = JSON.parse(data)
-      res.json(cache)
+      var data = fs.readFileSync("cache.json")
     };
+    let cache = JSON.parse(data)
+    res.json(cache)
   });
 });
 
 app.get("/api/items/:name", async (req, res) => {
   let itemName = req.params.name;
-
   let infos = await getItemDetails(("https://minecraftitemids.com/item/" + itemName.toLowerCase()).replace(" ", "-"));
-
   res.json(infos);
 });
 
 app.get("/api/update", async (req, res) => {
-  let items = await getItemsGenerics();
-
+  await getItemsGenerics();
   res.send("ok");
 });
+
 
 async function getItemDetails(endpoint) {
   let html = await rp(endpoint);
