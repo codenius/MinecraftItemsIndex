@@ -26,16 +26,31 @@ app.use('/img', express.static('html/img'))
 
 var cache = fs.readFileSync("cache.json");
 
-app.get("/:file", (req, res) => {
-  res.render(req.params.file, {user:"ksdagh"})
+app.get("/", (req,res) => {
+  res.render("index.html", {user:"ksdagh"})
+})
+// app.get("/:file", (req, res) => {
+//   res.render(req.params.file, {user:"ksdagh"}) || error404(res)
+  
+// })
+
+app.get("/items", (req,res) => {
+  res.render("")
 })
 
-app.get("/api/items/:name", async (req, res) => {
+app.get("/items/:name", async (req, res) => {
   let itemName = req.params.name;
   let infos = await getItemDetails(("https://minecraftitemids.com/item/" + itemName.toLowerCase()).replace(" ", "-"));
   res.json(infos);
 });
 
+app.use((req, res, next) => {
+  error404(res);
+});
+
+function error404(res) {
+  res.status(404).send('Sorry cant find that!');
+}
 
 async function getItemDetails(endpoint) {
   let html = await rp(endpoint);
