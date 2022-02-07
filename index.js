@@ -24,7 +24,7 @@ app.use('/js', express.static('html/js'))
 app.use('/img', express.static('html/img'))
 
 
-var cache = fs.readFileSync("cache.json");
+var cache = JSON.parse(fs.readFileSync("cache.json"));
 
 app.get("/", (req,res) => {
   res.render("index.html", {user:"ksdagh"})
@@ -35,11 +35,13 @@ app.get("/", (req,res) => {
 // })
 
 app.get("/items", (req,res) => {
-  res.render("")
+  res.render("items.html", {items: cache.items.sort((a,b) => (a.name > b.name ? 1 : -1))})
 })
 
 app.get("/items/:name", async (req, res) => {
   let itemName = req.params.name;
+  let url = cache.items.find((element)=>{return element}).url || error404();
+  console.log(url)
   let infos = await getItemDetails(("https://minecraftitemids.com/item/" + itemName.toLowerCase()).replace(" ", "-"));
   res.json(infos);
 });
