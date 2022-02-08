@@ -10,28 +10,45 @@
         href="img/icon.png"
         type="image/x-icon">
 <link rel="stylesheet" href="css/style.css">
-<script src="js/loader.js"></script>
+<link rel="stylesheet" href="css/nav.css">
+<!-- <script src="js/loader.js"></script> -->
+<script src="js/nav.js"></script>
 </head>
 
-<body>name
+<body>
 
-<nav>
-    <a href="/">MII</a>
-    <ul>
-        <li>Items</li>
-        <li></li>
-    </ul>
-</nav>
-<ul>
-    <li><img src="https://www.google.com/favicon.ico" alt="">Name</li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-</ul>
+    <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'Home')" id="defaultOpen"> <img src="https://www.google.com/favicon.ico" alt=""> </button>
+        <button class="tablinks" onclick="openCity(event, 'Items')">Items</button>
+        <button class="tablinks" onclick="openCity(event, 'Search')">Search</button>
+      </div>
+  
+      <!-- Tab content -->
+      <div id="Home" class="tabcontent">
+        <h3>Home</h3>
+        <p>This is the Homepage.</p>
+      </div>
+  
+      <div id="Items" class="tabcontent">
+        <h3>Items</h3>
+        <table>
+          <tr> <td>A</td> <td><img src="https://www.google.com/favicon.ico" alt=""></td> <td>Item 1</td> </tr>
+          <tr> <td> </td> <td><img src="https://www.google.com/favicon.ico" alt=""></td> <td>Item 2</td> </tr>
+        </table>
+      </div>
+  
+      <div id="Search" class="tabcontent">
+        <h3>Search</h3>
+        <p>Search for an Item.</p>
+      </div>
+  
+      <script>
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+      </script>
+
 <% if (user) { %>
     <h2><%= user %></h2>
   <% } %>
-</body>
 
 </html>
