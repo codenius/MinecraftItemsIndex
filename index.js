@@ -34,15 +34,19 @@ app.get("/", (req,res) => {
   
 // })
 
+app.get("/update",async (req,res) => {
+  getItemsGenerics();
+  res.send("Fetching...")
+})
+
 app.get("/items", (req,res) => {
   res.render("items.html", {items: cache.items.sort((a,b) => (a.name > b.name ? 1 : -1))})
 })
 
 app.get("/items/:name", async (req, res) => {
-  let itemName = req.params.name;
-  let url = cache.items.find((element)=>{return element}).url || error404();
-  console.log(url)
-  let infos = await getItemDetails(("https://minecraftitemids.com/item/" + itemName.toLowerCase()).replace(" ", "-"));
+  let itemName = req.params.name.replace("-", " ");
+  let url = cache.items.find((element) => (element.url.split("/").at(-1) == itemName)).url || error404();
+  let infos = await getItemDetails(("https://minecraftitemids.com/item/" + url.split("/").at(-1).toLowerCase()).replace(" ", "-"));
   res.json(infos);
 });
 
