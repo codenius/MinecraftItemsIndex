@@ -18,36 +18,41 @@ app.listen(port, () => {
 app.engine('.html', require('ejs').__express)
 app.set('view engine', 'ejs')
 app.set('views', 'html')
-// use assets
-app.use('/css', express.static('html/css'))
-app.use('/js', express.static('html/js'))
-app.use('/img', express.static('html/img'))
-
 
 var cache = JSON.parse(fs.readFileSync("cache.json"));
 
-app.get("/", (req,res) => {
-  res.render("index.html", {user:"ksdagh"})
+app.get("/", (req, res) => {
+  res.render("index.html", {
+    user: "ksdagh"
+  })
 })
 // app.get("/:file", (req, res) => {
 //   res.render(req.params.file, {user:"ksdagh"}) || error404(res)
-  
+
 // })
 
-app.get("/update",async (req,res) => {
+// use assets
+app.use('/', express.static('html/'))
+
+app.get("/update", async (req, res) => {
   getItemsGenerics();
   res.send("Fetching...")
 })
 
-app.get("/items", (req,res) => {
-  res.render("items.html", {items: cache.items.sort((a,b) => (a.name > b.name ? 1 : -1))})
+app.get("/items", (req, res) => {
+  res.render("items.html", {
+    items: cache.items.sort((a, b) => (a.name > b.name ? 1 : -1))
+  })
 })
 
 app.get("/items/:name", async (req, res) => {
-  let itemName = req.params.name.replace("-", " ");
-  let url = cache.items.find((element) => (element.url.split("/").at(-1) == itemName)).url || error404();
-  let infos = await getItemDetails(("https://minecraftitemids.com/item/" + url.split("/").at(-1).toLowerCase()).replace(" ", "-"));
-  res.json(infos);
+  let itemName = req.params.name
+  if (cache.items.find((element) => (element.simple_name == itemName))) {
+    let infos = await getItemDetails("https://minecraftitemids.com/item/" + itemName);
+    res.json(infos);
+  } else {
+    error404(res)
+  }
 });
 
 app.use((req, res, next) => {
@@ -55,7 +60,7 @@ app.use((req, res, next) => {
 });
 
 function error404(res) {
-  res.status(404).send('Sorry cant find that!');
+  res.status(404).send('Sorry, cant find that!');
 }
 
 async function getItemDetails(endpoint) {
@@ -109,6 +114,13 @@ async function getItemsGenerics() {
         })
         .get();
 
+      let simple_names = dom(".rd-table > tbody > tr")
+        .find("> :nth-child(2) > a")
+        .map((index, element) => {
+          return dom(element).attr("href").split("/")[dom(element).attr("href").split("/").length - 1];
+        })
+        .get();
+
       let urls = dom(".rd-table > tbody > tr")
         .find("> :nth-child(2) > a")
         .map((index, element) => {
@@ -138,6 +150,9 @@ async function getItemsGenerics() {
         .get();
 
       for (let i = 0; i < names.length; i++) {
+        let simple_name = simple_names[i];
+        if (simple_name == "") simple_name = "N/A";
+
         let name = names[i];
         if (name == "") name = "N/A";
 
@@ -157,6 +172,7 @@ async function getItemsGenerics() {
         if (numerical_id == "") numerical_id = "N/A";
 
         items.push({
+          simple_name,
           name,
           image,
           url,
@@ -179,6 +195,7 @@ async function getItemsGenerics() {
 
   let data = JSON.stringify(cache);
   fs.writeFileSync("cache.json", data);
+  cache = JSON.parse(fs.readFileSync("cache.json"));
 
   console.log("Done.")
 }

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MII - Items</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
@@ -15,12 +15,13 @@
       <% var prevLetter = "";
       items.forEach((element) => { %>
       <tr>
-        <% if (prevLetter != element.name[0]) {  %>
         <td>
+          <% if (prevLetter != element.name[0]) { %>
           <%= element.name[0]; %>
+          <% }; prevLetter = element.name[0]; %>
         </td>
-        <% }; var prevLetter = element.name[0]; %>
-        <td><a href="/items/<%= element.url.split("/").at(-1).replace(" ", "-") %>"><img src="<%= element.image %>" alt="<%= element.numerical_id %>">
+        <td>
+          <a href="/items/<%= element.simple_name %>"><img src="<%= element.image %>" alt="<%= element.numerical_id %>">
             <%= element.name %>
           </a>
         </td>
