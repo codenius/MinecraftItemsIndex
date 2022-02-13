@@ -3,6 +3,9 @@ const express = require("express");
 const fs = require("fs");
 const rp = require("request-promise");
 
+// change working directory to directory of this file for correct paths
+process.chdir(__dirname)
+
 // getItemsGenerics()
 setInterval(getItemsGenerics, 1000 * 60 * 60 * 1);
 
@@ -17,7 +20,9 @@ app.listen(port, () => {
 
 app.engine('.html', require('ejs').__express)
 app.set('view engine', 'ejs')
-app.set('views', 'html')
+app.set('views', './views/pages')
+// use assets
+app.use('/', express.static('./public'))
 
 var cache = JSON.parse(fs.readFileSync("cache.json"));
 
@@ -26,13 +31,6 @@ app.get("/", (req, res) => {
     user: "ksdagh"
   })
 })
-// app.get("/:file", (req, res) => {
-//   res.render(req.params.file, {user:"ksdagh"}) || error404(res)
-
-// })
-
-// use assets
-app.use('/', express.static('html/'))
 
 app.get("/update", async (req, res) => {
   getItemsGenerics();

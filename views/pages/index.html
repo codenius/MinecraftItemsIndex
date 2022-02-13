@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include("../partials/head.html") %>
+  <title>MII - Home</title>
+</head>
+
+<body>
+  <%- include("../partials/nav.html") %>
+
+  <% if (user) { %>
+  <h2><%= user %></h2>
+  <% } %>
+
+</html>
