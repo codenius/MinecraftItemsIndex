@@ -5,9 +5,11 @@
     </div>
     <div class="site-header__end">
       <nav class="nav">
-        <button class="nav__toggle" aria-expanded="false" type="button">
-          menu
-        </button>
+        <div class="nav__toggle" aria-expanded="false" type="button">
+          <div id="hamburger" class="hamburger-icon-container" onclick="this.classList.toggle('hamburger-active')">
+            <span class="hamburger-icon"></span>
+          </div>
+        </div>
         <ul class="nav__wrapper">
           <li class="nav__item"><a href="/items">Items</a></li>
           <li class="nav__item"><a href="/about">About</a></li>

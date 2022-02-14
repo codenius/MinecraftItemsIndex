@@ -1,0 +1,56 @@
+/* Basis Styling */
+
+.hamburger-icon-container {
+    color: transparent;
+    height: 1.7em;
+    width: 1.7em;
+    position: relative;
+    cursor: pointer;
+    background: currentColor;
+    border:10px solid currentColor;
+    border-radius: 3px;
+  }
+  
+  .hamburger-icon,
+  .hamburger-icon:before,
+  .hamburger-icon:after {
+    content: '';
+    position: absolute;
+    height: 3px;
+    width: 1.7em;
+    background: black;
+    transition: all .2s ease;
+  }
+  
+  .hamburger-icon {
+    top: 0.13rem;
+    right: -0.63rem;
+  }
+  
+  .hamburger-icon:before {
+    top: -0.55em
+  }
+  
+  .hamburger-icon:after {
+    top: 0.55em
+  }
+
+/* Darstellung wenn das Close-Icon angezeigt werden soll */
+
+.hamburger-active .hamburger-icon-container {
+    color:lime;
+  }
+  
+  .hamburger-active .hamburger-icon {
+    background: transparent;
+    transform: rotate(-135deg)
+  }
+  
+  .hamburger-active .hamburger-icon:before,
+  .hamburger-active .hamburger-icon:after {
+    top: 0
+  }
+  
+  .hamburger-active .hamburger-icon:before {
+    transform: rotate(90deg)
+  }

@@ -13,6 +13,6 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon --ignore 'cache.json' --exec 'npm start'"
+    "dev": "nodemon --ignore cache.json --exec npm start"
   }
 }
