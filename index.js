@@ -2,9 +2,10 @@ const cheerio = require("cheerio");
 const express = require("express");
 const fs = require("fs");
 const rp = require("request-promise");
+const lunr = require("lunr")
 
 // change working directory to directory of this file for correct paths
-process.chdir(__dirname)
+process.chdir(__dirname);
 
 // getItemsGenerics()
 setInterval(getItemsGenerics, 1000 * 60 * 60 * 1);
@@ -25,6 +26,17 @@ app.set('views', './views/pages')
 app.use('/', express.static('./public'))
 
 var cache = JSON.parse(fs.readFileSync("cache.json"));
+
+var index = lunr(function () {
+  this.ref("simple_name");
+  this.field("name");
+  this.field("id");
+  this.field("numerical_id");
+
+  cache.items.forEach((item) => {
+    this.add(item)
+  }, this)
+})
 
 app.get("/", (req, res) => {
   res.render("index.html", {
@@ -52,6 +64,10 @@ app.get("/items/:name", async (req, res) => {
     error404(res)
   }
 });
+
+app.get("/search", (req, res) => {
+  res.json(index.search(req.query.search))
+})
 
 app.use((req, res, next) => {
   error404(res);
