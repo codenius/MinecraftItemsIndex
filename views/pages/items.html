@@ -19,10 +19,18 @@
           <% }; prevLetter = element.name[0]; %>
         </td>
         <td>
-          <a href="/items/<%= element.simple_name %>"><img src="<%= element.image %>" alt="<%= element.numerical_id %>">
-            <%= element.name %>
+          <a href="/items/<%= element.simple_name %>">
+            <% if (element.image == "N/A") {
+                element.image = "/img/barrier.png"              
+            } %>
+            <picture> <img src="<%= element.image %>">
+            </picture>
           </a>
         </td>
+        <td> <a href="/items/<%= element.simple_name %>">
+            <%= element.name %></a></td>
+
+
       </tr>
       <% }) %>
     </tbody>
