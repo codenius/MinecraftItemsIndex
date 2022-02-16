@@ -8,7 +8,19 @@
 <body>
   <%- include("../partials/nav.html") %>
 
-  <%= item %>
+  <table>
+    <tr>
+      <td>Discription:&nbsp;</td>
+      <td><%= item.description %></td>
+    </tr>
+    <tr>
+      <td>Hardness:&nbsp;</td>
+      <td><%= item.properties.hardness %></td>
+    </tr>
+  </table>
+
+  
+  
 </body>
 
 </html>

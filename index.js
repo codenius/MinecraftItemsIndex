@@ -59,7 +59,7 @@ app.get("/items/:name", async (req, res) => {
   let itemName = req.params.name
   if (cache.items.find((element) => (element.simple_name == itemName))) {
     let infos = await getItemDetails("https://minecraftitemids.com/item/" + itemName);
-    res.json(infos);
+    res.render("item.html", {item: infos})
   } else {
     error404(res)
   }
