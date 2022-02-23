@@ -2,41 +2,36 @@ const cheerio = require("cheerio");
 const express = require("express");
 const fs = require("fs");
 const rp = require("request-promise");
-const lunr = require("lunr")
+const lunr = require("lunr");
+const path = require("path");
 
 // change working directory to directory of this file for correct paths
 process.chdir(__dirname);
 
-// getItemsGenerics()
-setInterval(getItemsGenerics, 1000 * 60 * 60 * 1);
-
 require("dotenv").config();
 const port = process.env.port || 3000;
+const dataDirectory = process.env.dataDirectory || "./data";
 
 const app = express();
 
-app.listen(port, () => {
-  console.log(`Running on http://localhost:${port}`);
-});
+(async () => {
+  if (!fs.existsSync(path.join(dataDirectory, "items.json")) || process.argv.slice(2).includes("-u")) {
+    await getItemsGenerics();
+  } else {
+    items = JSON.parse(fs.readFileSync(path.join(dataDirectory, "items.json")));
+  };
+  indexItems();
+  app.listen(port, () => {
+    console.log(`Listening on http://localhost:${port}`);
+  });
+})()
 
 app.engine('.html', require('ejs').__express)
 app.set('view engine', 'ejs')
 app.set('views', './views/pages')
-// use assets
-app.use('/', express.static('./public'))
+app.use('/', express.static('./public')) // serve css, js and images
 
-var cache = JSON.parse(fs.readFileSync("cache.json"));
-
-var index = lunr(function () {
-  this.ref("simple_name");
-  this.field("name");
-  this.field("id");
-  this.field("numerical_id");
-
-  cache.items.forEach((item) => {
-    this.add(item)
-  }, this)
-})
+// *** Routes ***
 
 app.get("/", (req, res) => {
   res.render("index.html", {
@@ -44,34 +39,46 @@ app.get("/", (req, res) => {
   })
 })
 
-app.get("/update", async (req, res) => {
-  getItemsGenerics();
-  res.send("Fetching...")
-})
-
 app.get("/items", (req, res) => {
   res.render("items.html", {
-    items: cache.items.sort((a, b) => (a.name > b.name ? 1 : -1))
+    items: items.sort((a, b) => (a.name > b.name ? 1 : -1))
   })
 })
 
 app.get("/items/:name", async (req, res) => {
   let itemName = req.params.name
-  if (cache.items.find((element) => (element.simple_name == itemName))) {
+  if (items.find((element) => (element.simple_name == itemName))) {
     let infos = await getItemDetails("https://minecraftitemids.com/item/" + itemName);
-    res.render("item.html", {item: infos})
+    res.render("item.html", { item: infos })
   } else {
     error404(res)
   }
 });
 
 app.get("/search", (req, res) => {
-  res.json(index.search(req.query.search))
+  res.json(index.search(req.query.q))
 })
 
+// Error route
 app.use((req, res, next) => {
   error404(res);
 });
+
+// *** Functions ***
+
+function indexItems() {
+  index = lunr(function () {
+    // this.metadataWhitelist = ['position'];
+    this.ref("simple_name");
+    this.field("name");
+    this.field("id");
+    this.field("numerical_id");
+
+    items.forEach((item) => {
+      this.add(item)
+    }, this)
+  })
+}
 
 function error404(res) {
   res.status(404).send('Sorry, cant find that!');
@@ -100,7 +107,7 @@ async function getItemsGenerics() {
   let page = 1;
   let exists = true;
 
-  let items = [];
+  let data = [];
 
   do {
     let html = await rp(`https://minecraftitemids.com/${page > 1 ? page : ""}`);
@@ -185,7 +192,7 @@ async function getItemsGenerics() {
         let numerical_id = numerical_ids[i];
         if (numerical_id == "") numerical_id = "N/A";
 
-        items.push({
+        data.push({
           simple_name,
           name,
           image,
@@ -202,14 +209,10 @@ async function getItemsGenerics() {
     }
   } while (exists);
 
-  let cache = {
-    last_update: Date.now(),
-    items,
-  };
-
-  let data = JSON.stringify(cache);
-  fs.writeFileSync("cache.json", data);
-  cache = JSON.parse(fs.readFileSync("cache.json"));
+  fs.existsSync(dataDirectory) || fs.mkdirSync(dataDirectory, { recursive: true });
+  fs.writeFileSync(path.join(dataDirectory, "items.json"), JSON.stringify(data));
+  items = data;
+  indexItems();
 
   console.log("Done.")
 }
