@@ -4,6 +4,7 @@ const fs = require("fs");
 const rp = require("request-promise");
 const lunr = require("lunr");
 const path = require("path");
+const cliProgress = require("cli-progress");
 
 // change working directory to directory of this file for correct paths
 process.chdir(__dirname);
@@ -106,17 +107,26 @@ async function getItemDetails(endpoint) {
 async function getItemsGenerics() {
   let page = 1;
   let exists = true;
-
   let data = [];
+
+  var bar = new cliProgress.SingleBar({
+    clearOnComplete: true, hideCursor: true,
+    format: 'Fetching Items [{bar}] {percentage}% | ETA: {eta}s | {value}/{total}'
+  }, cliProgress.Presets.legacy);
 
   do {
     let html = await rp(`https://minecraftitemids.com/${page > 1 ? page : ""}`);
     let dom = await cheerio.load(html);
 
+    if (page == 1) {
+      var pages = dom(".rd-pagination > .rd-pagination__list > .rd-pagination__item:nth-last-child(2) > a").text()
+      bar.start(pages, 0)
+    }
+
     let title = dom("title").text();
 
     if (title.split(" ")[0] == "Page" || page == 1) {
-      console.log(`Fetching page ${page}...`)
+      bar.update(page)
       let names = dom(".rd-table > tbody > tr")
         .find("> :nth-child(2) > a")
         .map((index, element) => {
@@ -214,5 +224,5 @@ async function getItemsGenerics() {
   items = data;
   indexItems();
 
-  console.log("Done.")
+  bar.stop()
 }
