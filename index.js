@@ -57,7 +57,11 @@ app.get("/items/:name", async (req, res) => {
 });
 
 app.get("/search", (req, res) => {
-  res.json(index.search(req.query.q))
+  let search = index.search(req.query.q);
+  let results = search.map((element) => {
+    return items.find(item => item.simple_name == element.ref)
+  });
+  res.json(results)
 })
 
 // Error route

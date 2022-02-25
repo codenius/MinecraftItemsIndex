@@ -21,3 +21,27 @@ body::before {
     position: fixed;
 }
 
+/* Search results */
+
+.search__form {
+    position: relative;
+}
+
+#search_results {
+    position: absolute;
+    background: white;
+    width: 100%;
+    border-radius: 0 0 0.5rem 0.5rem;
+    padding: 0.5rem;
+    padding-top: 0.3rem;
+    visibility: hidden;
+}
+
+#search_results > li > a {
+    display: flex;
+}
+
+#search_results > li > a > span {
+    display: flex;
+    flex-direction: column;
+}
