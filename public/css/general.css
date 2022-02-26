@@ -1,24 +1,38 @@
 body {
-    /* background-image: url("../img/background.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed; */
     font-family: Roboto;
 }
 
-/* Workaround for iOS (background) */
-body::before {
-    content: '';
+/* Background */
+
+body {
     background-image: url("../img/background.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    /* background-attachment: fixed; */ /* This property does not work properly on iOS */
-    height: 100vh;
-    width: 100vw;
-    z-index: -1;
-    position: fixed;
+    background-attachment: fixed;
+}
+
+/* Workaround for iOS (background) */
+
+@media not all and (min-resolution:.001dpcm) {
+    @supports (-webkit-appearance: none) {
+        body::before {
+            content: '';
+            background-image: url("../img/background.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* background-attachment: fixed; */
+            /* This property does not work properly on iOS */
+            height: 100vh;
+            width: 100vw;
+            z-index: -1;
+            position: fixed;
+        }
+        body {
+            background-image: none;
+        }
+    }
 }
 
 /* Search results */
@@ -39,12 +53,12 @@ body::before {
     overflow-y: auto;
 }
 
-#search_results > li > a {
+#search_results>li>a {
     display: flex;
     align-items: center;
 }
 
-#search_results > li > a > picture {
+#search_results>li>a>picture {
     min-width: 3rem;
     min-height: 3rem;
     display: flex;
@@ -52,20 +66,20 @@ body::before {
     align-items: center;
 }
 
-#search_results > li > a > picture > img {
+#search_results>li>a>picture>img {
     width: max-content;
 }
 
-#search_results > li > a > span {
+#search_results>li>a>span {
     display: flex;
     flex-direction: column;
 }
 
-#search_results > li > a > span > div {
+#search_results>li>a>span>div {
     display: flex;
 }
 
-#search_results > li > a > span > div:nth-child(2) {
+#search_results>li>a>span>div:nth-child(2) {
     font-size: 0.8em;
     color: grey;
 }
