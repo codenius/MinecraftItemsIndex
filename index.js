@@ -12,6 +12,7 @@ process.chdir(__dirname);
 require("dotenv").config();
 const port = process.env.port || 3000;
 const dataDirectory = process.env.dataDirectory || "./data";
+const lunrEscapedCharacters = [":", "+", "-", "^", "~"];
 
 const app = express();
 
@@ -50,14 +51,20 @@ app.get("/items/:name", async (req, res) => {
   let itemName = req.params.name
   if (items.find((element) => (element.simple_name == itemName))) {
     let infos = await getItemDetails("https://minecraftitemids.com/item/" + itemName);
-    res.render("item.html", { item: infos })
+    res.render("item.html", {
+      item: infos
+    })
   } else {
     error404(res)
   }
 });
 
 app.get("/search", (req, res) => {
-  let search = index.search(req.query.q);
+  let query = req.query.q;
+  lunrEscapedCharacters.forEach((element) => {
+    query = query.replace(element, "\\" + element)
+  });
+  let search = index.search(query);
   let results = search.map((element) => {
     return items.find(item => item.simple_name == element.ref)
   });
@@ -114,7 +121,8 @@ async function getItemsGenerics() {
   let data = [];
 
   var bar = new cliProgress.SingleBar({
-    clearOnComplete: true, hideCursor: true,
+    clearOnComplete: true,
+    hideCursor: true,
     format: 'Fetching Items [{bar}] {percentage}% | ETA: {eta}s | {value}/{total}'
   }, cliProgress.Presets.legacy);
 
@@ -223,7 +231,9 @@ async function getItemsGenerics() {
     }
   } while (exists);
 
-  fs.existsSync(dataDirectory) || fs.mkdirSync(dataDirectory, { recursive: true });
+  fs.existsSync(dataDirectory) || fs.mkdirSync(dataDirectory, {
+    recursive: true
+  });
   fs.writeFileSync(path.join(dataDirectory, "items.json"), JSON.stringify(data));
   items = data;
   indexItems();
