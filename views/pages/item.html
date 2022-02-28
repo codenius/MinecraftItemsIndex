@@ -3,25 +3,51 @@
 
 <head>
   <%- include("../partials/head.html") %>
-  <link rel="stylesheet" href="/css/item.css">
+    <link rel="stylesheet" href="/css/item.css">
+    <script src="/js/item.js"></script>
 </head>
 
 <body>
   <%- include("../partials/nav.html") %>
 
-  <table>
-    <tr>
-      <td>Discription:&nbsp;</td>
-      <td><%= item.description %></td>
-    </tr>
-    <tr>
-      <td>Hardness:&nbsp;</td>
-      <td><%= item.properties.hardness %></td>
-    </tr>
-  </table>
+    <table>
+      <tbody>
+        <tr>
+          <td>Discription:&nbsp;</td>
+          <td>
+            <%= item.description %>
+          </td>
+        </tr>
+        <tr>
+          <td>Hardness:&nbsp;</td>
+          <td>
+            <%= item.properties.hardness %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-  
-  
+    <table>
+      <thead>
+        <td>Property</td>
+        <td>Bar</td>
+        <td>Value</td>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hardness</td>
+          <td>
+            <div class="bar_wrapper">
+              <div class="bar" data-percentage="<%= item.properties.hardness %>"></div>
+            </div>
+          </td>
+          <td>
+            <%= item.properties.hardness %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
 </body>
 
 </html>

@@ -12,3 +12,22 @@ table tbody tr td {
 table tbody tr td a {
     margin: auto 0;
 }
+
+.bar_wrapper {
+    width: 10rem;
+    height: 1rem;
+    /* border: solid 0.05rem;
+    padding: 0.1rem; */
+    border-radius: 10rem;
+    background: #efebeb;  
+}
+
+.bar {
+    width: 0%;
+    height: 100%;
+    transition: all 1s ease;
+    background-color: lightblue;
+    margin: 0;
+    padding: 0;
+    border-radius: 10em;
+}
