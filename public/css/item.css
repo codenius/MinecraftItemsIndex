@@ -19,13 +19,14 @@ table tbody tr td a {
     /* border: solid 0.05rem;
     padding: 0.1rem; */
     border-radius: 10rem;
-    background: #efebeb;  
+    background: #efebeb;
+    overflow: hidden;
 }
 
 .bar {
     width: 0%;
     height: 100%;
-    transition: all 1s ease;
+    transition: all 1s ease; /* cubic-bezier(0.18, 0.89, 0.32, 1.28) */
     background-color: lightblue;
     margin: 0;
     padding: 0;
