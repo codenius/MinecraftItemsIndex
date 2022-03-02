@@ -9,19 +9,28 @@
 
 <body>
   <%- include("../partials/nav.html") %>
+    <main>
+      <div id="sidebar">
+        <div id="picture"><picture><img src="/img/icon.png" alt="item-image"></picture></div>
+        
+        <div id="basic-item-data"></div>
+      </div>
+      <div id="main">
+        <div id="item-name"></div>
+        <div id="description"></div>
+        <div id="bars"></div>
+      </div>
+    </main>
+
 
     <table>
       <tbody>
         <tr>
-          <td>Discription:&nbsp;</td>
+          <td>
+            <div id="circle"></div>
+          </td>
           <td>
             <%= item.description %>
-          </td>
-        </tr>
-        <tr>
-          <td>Hardness:&nbsp;</td>
-          <td>
-            <%= item.properties.hardness %>
           </td>
         </tr>
       </tbody>
@@ -38,7 +47,7 @@
           <td>Hardness</td>
           <td>
             <div class="bar_wrapper">
-              <div class="bar" data-percentage="<%= item.properties.hardness %>"></div>
+              <div class="bar" data-percentage="<%= item.properties.hardness * 10 %>"></div>
             </div>
           </td>
           <td>
