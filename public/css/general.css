@@ -83,3 +83,7 @@ body {
     font-size: 0.8em;
     color: grey;
 }
+
+#search_results>li>a>span>div:nth-child(2)>:nth-child(2) {
+    margin: 0 0.2rem;
+}

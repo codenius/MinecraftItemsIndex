@@ -1,5 +1,5 @@
 var typingTimer;
-var doneTypingInterval = 2000;
+var doneTypingInterval = 1000;
 
 document.addEventListener("DOMContentLoaded", () => {
     // document.getElementById("search").addEventListener("input", search); // needs to much resources
@@ -35,7 +35,7 @@ async function search() {
                 <picture><img src="${element.image}" alt=""></picture>
                 <span>
                   <div>${element.name}</div>
-                  <div><span>${element.id}</span><span>${element.numerical_id}</span></div>
+                  <div><span>${element.id}</span><span>&#124;</span><span>${element.numerical_id}</span></div>
                 </span>
               </a>
             </li>
