@@ -22,14 +22,12 @@ const app = express();
   } else {
     items = JSON.parse(fs.readFileSync(path.join(dataDirectory, "items.json")));
   };
-  console.log(await getItemDetails(items[1]))
+indexItems();
   if (!fs.existsSync(path.join(dataDirectory, "items.json")) || process.argv.slice(2).includes("-u")) {
     await getItemsDetails()
   } else {
     itemsDetails = JSON.parse(fs.readFileSync(path.join(dataDirectory, "itemsDetails.json")));
   }
-  
-  indexItems();
   app.listen(port, () => {
     console.log(`Listening on http://localhost:${port}`);
   });
@@ -106,7 +104,11 @@ function error404(res) {
 async function getItemDetails(endpoint) {
   let html = await rp(endpoint);
   let dom = await cheerio.load(html);
-
+  
+  let simple_name = endpoint.split("/")[endpoint.split("/") - 1]
+  let name = dom(".breadcrumb-item.active")[0].text().trim()
+  let image = dom(".item-infobox > img").attr("src").replace("64", "128")
+  
   let description = dom(".card-body.item-card-body > :nth-child(1) > p").text().trim();
 
   var properties = {};
@@ -117,6 +119,9 @@ async function getItemDetails(endpoint) {
   }
 
   return {
+    simple_name,
+    name,
+    image,
     description,
     properties
   };
