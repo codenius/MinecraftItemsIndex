@@ -22,6 +22,13 @@ const app = express();
   } else {
     items = JSON.parse(fs.readFileSync(path.join(dataDirectory, "items.json")));
   };
+  console.log(await getItemDetails(items[1]))
+  if (!fs.existsSync(path.join(dataDirectory, "items.json")) || process.argv.slice(2).includes("-u")) {
+    await getItemsDetails()
+  } else {
+    itemsDetails = JSON.parse(fs.readFileSync(path.join(dataDirectory, "itemsDetails.json")));
+  }
+  
   indexItems();
   app.listen(port, () => {
     console.log(`Listening on http://localhost:${port}`);
@@ -50,7 +57,7 @@ app.get("/items", (req, res) => {
 app.get("/items/:name", async (req, res) => {
   let itemName = req.params.name
   if (items.find((element) => (element.simple_name == itemName))) {
-    let infos = await getItemDetails("https://minecraftitemids.com/item/" + itemName);
+    let infos = itemsDetails.find((element) => (element.simple_name == items.find((element) => (element.simple_name == itemName)).properties.item_id))
     res.render("item.html", {
       item: infos
     })
@@ -113,6 +120,31 @@ async function getItemDetails(endpoint) {
     description,
     properties
   };
+}
+
+async function getItemsDetails() {
+  var bar = new cliProgress.SingleBar({
+    clearOnComplete: true,
+    hideCursor: true,
+    format: 'Fetching Items Details [{bar}] {percentage}% | ETA: {eta}s | {value}/{total}'
+  }, cliProgress.Presets.legacy);
+  bar.start(items.length, 0)
+  
+  itemsDetails = []
+  
+  for (let index = 0; index < items.length; index++) {
+  const element = items[index];
+  let item = await getItemDetails(element.url)
+  console.log(item)
+  itemsDetails.push(item)
+  bar.update(index + 1)
+  }
+  fs.existsSync(dataDirectory) || fs.mkdirSync(dataDirectory, {
+    recursive: true
+  });
+  fs.writeFileSync(path.join(dataDirectory, "itemsDetails.json"), JSON.stringify(itemsDetails));
+  
+  bar.stop()
 }
 
 async function getItemsGenerics() {
