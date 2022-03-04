@@ -13,17 +13,18 @@ require("dotenv").config();
 const port = process.env.port || 3000;
 const dataDirectory = process.env.dataDirectory || "./data";
 const lunrEscapedCharacters = [":", "+", "-", "^", "~"];
+const args = process.argv.slice(2);
 
 const app = express();
 
 (async () => {
-  if (!fs.existsSync(path.join(dataDirectory, "items.json")) || process.argv.slice(2).includes("-u")) {
+  if (!fs.existsSync(path.join(dataDirectory, "items.json")) || (args.includes("update") && args.includes("items"))) {
     await getItemsGenerics();
   } else {
     items = JSON.parse(fs.readFileSync(path.join(dataDirectory, "items.json")));
   };
-indexItems();
-  if (!fs.existsSync(path.join(dataDirectory, "items.json")) || process.argv.slice(2).includes("-u")) {
+  indexItems();
+  if (!fs.existsSync(path.join(dataDirectory, "itemsDetails.json")) || (args.includes("update") && args.includes("itemsDetails"))) {
     await getItemsDetails()
   } else {
     itemsDetails = JSON.parse(fs.readFileSync(path.join(dataDirectory, "itemsDetails.json")));
@@ -55,7 +56,7 @@ app.get("/items", (req, res) => {
 app.get("/items/:name", async (req, res) => {
   let itemName = req.params.name
   if (items.find((element) => (element.simple_name == itemName))) {
-    let infos = itemsDetails.find((element) => (element.simple_name == items.find((element) => (element.simple_name == itemName)).properties.item_id))
+    let infos = itemsDetails.find((element) => (element.simple_name == itemName))
     res.render("item.html", {
       item: infos
     })
@@ -104,11 +105,13 @@ function error404(res) {
 async function getItemDetails(endpoint) {
   let html = await rp(endpoint);
   let dom = await cheerio.load(html);
-  
-  let simple_name = endpoint.split("/")[endpoint.split("/") - 1]
-  let name = dom(".breadcrumb-item.active")[0].text().trim()
-  let image = dom(".item-infobox > img").attr("src").replace("64", "128")
-  
+
+  let simple_name = endpoint.split("/")[endpoint.split("/").length - 1];
+  let name = dom(".breadcrumb-item.active").text().trim();
+  let image = dom(".item-infobox > img").attr("src") || "";
+  image = image.replace("64", "128");
+  image = `https://minecraftitemids.com${image}`
+
   let description = dom(".card-body.item-card-body > :nth-child(1) > p").text().trim();
 
   var properties = {};
@@ -130,25 +133,23 @@ async function getItemDetails(endpoint) {
 async function getItemsDetails() {
   var bar = new cliProgress.SingleBar({
     clearOnComplete: true,
-    hideCursor: true,
     format: 'Fetching Items Details [{bar}] {percentage}% | ETA: {eta}s | {value}/{total}'
   }, cliProgress.Presets.legacy);
   bar.start(items.length, 0)
-  
+
   itemsDetails = []
-  
   for (let index = 0; index < items.length; index++) {
-  const element = items[index];
-  let item = await getItemDetails(element.url)
-  console.log(item)
-  itemsDetails.push(item)
-  bar.update(index + 1)
+    const element = items[index];
+    let item = await getItemDetails(element.url)
+    itemsDetails.push(item)
+    bar.update(index + 1)
   }
+  
   fs.existsSync(dataDirectory) || fs.mkdirSync(dataDirectory, {
     recursive: true
   });
   fs.writeFileSync(path.join(dataDirectory, "itemsDetails.json"), JSON.stringify(itemsDetails));
-  
+
   bar.stop()
 }
 
@@ -159,7 +160,6 @@ async function getItemsGenerics() {
 
   var bar = new cliProgress.SingleBar({
     clearOnComplete: true,
-    hideCursor: true,
     format: 'Fetching Items [{bar}] {percentage}% | ETA: {eta}s | {value}/{total}'
   }, cliProgress.Presets.legacy);
 
