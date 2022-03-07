@@ -24,8 +24,18 @@ node index.js
 Then enter the displayed URL in your browser.
 
 ## Update cached items data
-*Execute the following commands in projects roots directory.*
+*Execute the following commands in projects root directory.*
 
 Use `node index.js update items` to update the items cache and `node index.js update itemsDetails` to update the details. 
 
 To do both use `npm run update` or `node index.js update items itemsDetails`.
+
+## Resources
+- Item fetching (https://github.com/nicolo-rancan/minecraft-items-api, extended)
+- Navigation bar (https://www.cssscript.com/demo/header-navbar-templates/header-3.html, modified)
+
+## Libraries and technologies
+- express as web application framework
+- ejs as templating engine for express
+- lunr to search items
+- cheerio for webscrapping (get items data)
