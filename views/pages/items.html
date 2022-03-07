@@ -3,39 +3,63 @@
 
 <head>
   <%- include("../partials/head.html") %>
-  <link rel="stylesheet" href="/css/items.css">
-  <title>MII - Items</title>
+    <link rel="stylesheet" href="/css/items.css">
+    <script src="/js/items.js"></script>
+    <title>MII - Items</title>
 </head>
 
 <body>
   <%- include("../partials/nav.html") %>
-  <table>
-    <tbody>
-      <% var prevLetter = "";
-      items.forEach((element) => { %>
-      <tr>
-        <td>
-          <% if (prevLetter != element.name[0]) { %>
-          <%= element.name[0]; %>
-          <% }; prevLetter = element.name[0]; %>
-        </td>
-        <td>
-          <a href="/items/<%= element.simple_name %>">
-            <% if (element.image == "N/A") {
-                element.image = "/img/barrier.png"              
-            } %>
-            <picture> <img src="<%= element.image %>">
-            </picture>
-          </a>
-        </td>
-        <td> <a href="/items/<%= element.simple_name %>">
-            <%= element.name %></a></td>
-
-
-      </tr>
-      <% }) %>
-    </tbody>
-  </table>
+    <main>
+      <table>
+        <thead>
+          <form action="submit">
+            <label for="order">Sort by: </label>
+            <select name="order" id="select_order">
+              <% let selected={}; selected[order]='selected="selected"' ;%>
+                <option <%=selected.alphabetic%> >alphabetic</option>
+                <option <%=selected.numeric%> >numeric</option>
+            </select>
+          </form>
+        </thead>
+        <tbody>
+          <% var prevLetter="" ; items.forEach((element)=> { %>
+            <tr>
+              <% if (order=="alphabetic" ) {%>
+                <td>
+                  <% if (prevLetter !=element.name[0]) { %>
+                    <%= element.name[0]; %>
+                      <% }; prevLetter=element.name[0]; %>
+                </td>
+                <% } else { let numerical_id=element.numerical_id.split(":");%>
+                  <td>
+                    <% if (prevLetter!=numerical_id[0]) { %>
+                      <% if (numerical_id[0]=="N/A" ) { numerical_id[0]="" } %>
+                        <%= numerical_id[0]; %>
+                          <% }; prevLetter=numerical_id[0]; %>
+                  </td>
+                  <td>
+                    <%= numerical_id[1] %>
+                  </td>
+                  <% } %>
+                    <td>
+                      <a href="/items/<%= element.simple_name %>">
+                        <% if (element.image=="N/A" ) { element.image="/img/barrier.png" } %>
+                          <picture>
+                            <img src="<%= element.image %>">
+                          </picture>
+                      </a>
+                    </td>
+                    <td>
+                      <a href="/items/<%= element.simple_name %>">
+                        <%= element.name %>
+                      </a>
+                    </td>
+            </tr>
+            <% }) %>
+        </tbody>
+      </table>
+    </main>
 </body>
 
 </html>

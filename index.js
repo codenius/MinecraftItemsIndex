@@ -48,8 +48,19 @@ app.get("/", (req, res) => {
 })
 
 app.get("/items", (req, res) => {
+  let rawItems = items.slice()
+  let sortedItems
+  let order
+  if (req.query.order == "alphabetic") {
+    sortedItems = rawItems.sort((a, b) => (a.name > b.name ? 1 : -1));
+    order = "alphabetic"
+  } else {
+    sortedItems = rawItems;
+    order = "numeric"
+  }
   res.render("items.html", {
-    items: items.sort((a, b) => (a.name > b.name ? 1 : -1))
+    items: sortedItems,
+    order: order
   })
 })
 
@@ -144,7 +155,7 @@ async function getItemsDetails() {
     itemsDetails.push(item)
     bar.update(index + 1)
   }
-  
+
   fs.existsSync(dataDirectory) || fs.mkdirSync(dataDirectory, {
     recursive: true
   });

@@ -1,7 +1,7 @@
 table {
     margin: 0 auto;
     background-color: rgba(240, 248, 255, 0.74);
-
+    font-size: 1.5rem;
 }
 
 table tbody tr td {
@@ -13,6 +13,10 @@ table tbody tr td a {
     margin: auto 0;
 }
 
+table tbody tr td:last-child {
+    font-size: 1rem;
+}
+
 picture {
     height: 3rem;
     width: 3rem;
@@ -21,8 +25,4 @@ picture {
 picture img {
     display: block;
     margin: auto;
-}
-
-tr td:first-child {
-    font-size: 1.5rem;
 }
