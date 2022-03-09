@@ -3,15 +3,36 @@
 
 <head>
   <%- include("../partials/head.html") %>
-  <link rel="stylesheet" href="/css/index.css">
-  <title>MII - Home</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <title>MII - Home</title>
 </head>
 
 <body>
   <%- include("../partials/nav.html") %>
 
-  <% if (user) { %>
-  <h2><%= user %></h2>
-  <% } %>
+    <main>
+      <div id="item_of_the_week">
+        <h1>Featured Items</h1>
+        <% items.forEach(element=> { %>
+          <span class="randomItem">
+            <div>
+              <img src="<%= element.image %>" alt="">
+            </div>
+            <div>
+              <%= element.name %>
+            </div>
+          </span>
+          <% }) %>
+            <%= %>
+      </div>
+      <div id="news">
+        <div id="mc_updates">
+          Minecraft Updates
+        </div>
+        <div id="new_items">
+          neue Items
+        </div>
+      </div>
+    </main>
 
 </html>

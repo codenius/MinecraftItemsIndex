@@ -42,8 +42,9 @@ app.use('/', express.static('./public')) // serve css, js and images
 // *** Routes ***
 
 app.get("/", (req, res) => {
+  let randomItems = itemsDetails.slice().sort(() => Math.random() - Math.random()).slice(0, 5);
   res.render("index.html", {
-    user: "ksdagh"
+    items: randomItems
   })
 })
 

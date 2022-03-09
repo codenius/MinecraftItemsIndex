@@ -1,0 +1,50 @@
+main{
+    padding: 1rem;
+    
+}
+
+main div {
+    margin-bottom: 1rem;
+}
+
+#item_of_the_week {
+    flex-basis: 25%;
+    margin-right: 1rem;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(223, 223, 223, 0.363);
+    border-radius: 1rem;
+    
+}
+
+#item_of_the_week h1 {
+    font-size: 3rem;
+    text-decoration: underline;
+}
+
+#item_of_the_week div:first-child {
+    width: 10rem;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#news {
+    flex-basis: 25%;
+    margin-right: 1rem;
+    display: flex;
+    background-color: rgba(223, 223, 223, 0.363);
+    border-radius: 1rem;
+}
+
+#news #mc_updates {
+    border-right: 3px solid gray;
+    width: 50%;
+}
+
+#news #new_items {
+    border-left: 3px;
+    border-left-color: rgb(0, 0, 0);
+}
+
