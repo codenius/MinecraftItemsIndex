@@ -1,11 +1,11 @@
 <header class="site-header">
-  <div class="wrapper site-header__wrapper">
+  <div class="site-header__wrapper">
     <div class="site-header__start">
       <a href="/" class="brand">MinecraftItemsIndex</a>
     </div>
     <div class="site-header__end">
       <nav class="nav">
-        <div class="nav__toggle" aria-expanded="false" type="button">
+        <div class="nav__toggle">
           <div id="hamburger" class="hamburger-icon-container" onclick="this.classList.toggle('hamburger-active')">
             <span class="hamburger-icon"></span>
           </div>
@@ -13,16 +13,14 @@
         <ul class="nav__wrapper">
           <li class="nav__item"><a href="/items">Items</a></li>
           <li class="nav__item"><a href="/about">About</a></li>
-
         </ul>
       </nav>
       <div class="search">
-        <button class="search__toggle" aria-label="Open search">
-          Search
+        <button class="search__toggle">
+          <img src="/img/search.svg" alt="search">
         </button>
         <form class="search__form" action="">
-          <label class="sr-only" for="search">Search</label>
-          <input type="search" name="" id="search" placeholder="Search item by name or id..." />
+          <input type="search" id="search" placeholder="Search item by name or id..." autocomplete="off"/>
           <ul id="search_results">
           </ul>
         </form>
