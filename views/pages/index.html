@@ -11,20 +11,22 @@
   <%- include("../partials/nav.html") %>
 
     <main>
-      <div id="item_of_the_week">
-        <h1>Featured Items</h1>
+      <ul id="randomItems">
+        <h2>Featured Items</h2>
         <% items.forEach(element=> { %>
-          <span class="randomItem">
-            <div>
-              <img src="<%= element.image %>" alt="">
-            </div>
-            <div>
-              <%= element.name %>
-            </div>
-          </span>
+          <li class="randomItem">
+            <a href="/items/<%= element.simple_name %>">
+              <div>
+                <img src="<%= element.image %>" alt="">
+              </div>
+              <div>
+                <%= element.name %>
+              </div>
+            </a>
+          </li>
           <% }) %>
-            <%= %>
-      </div>
+
+      </ul>
       <div id="news">
         <div id="mc_updates">
           Minecraft Updates
@@ -35,5 +37,5 @@
       </div>
     </main>
     <%- include("../partials/footer.html") %>
-    
+
 </html>
