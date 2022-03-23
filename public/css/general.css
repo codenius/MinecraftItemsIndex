@@ -5,6 +5,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 body {
     font-family: "Roboto", sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    width: 100%;
+    background-color: #a7a7a7;
+    color: #3a3a3a;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+footer a {
+    text-decoration: underline;
+}
+
+footer a:hover {
+    color: #0c0c0c;
 }
 
 a {
