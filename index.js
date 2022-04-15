@@ -23,11 +23,15 @@ const app = express();
   } else {
     items = JSON.parse(fs.readFileSync(path.join(dataDirectory, "items.json")));
   };
-  indexItems();
   if (!fs.existsSync(path.join(dataDirectory, "itemsDetails.json")) || (args.includes("update") && args.includes("itemsDetails"))) {
     await getItemsDetails()
   } else {
     itemsDetails = JSON.parse(fs.readFileSync(path.join(dataDirectory, "itemsDetails.json")));
+  }
+  if (!fs.existsSync(path.join(dataDirectory, "index.json")) || (args.includes("update") && args.includes("index"))) {
+    await indexItems()
+  } else {
+    index = lunr.Index.load(JSON.parse(fs.readFileSync(path.join(dataDirectory, "index.json"))))
   }
   app.listen(port, () => {
     console.log(`Listening on http://localhost:${port}`);
@@ -108,6 +112,10 @@ function indexItems() {
       this.add(item)
     }, this)
   })
+  fs.existsSync(dataDirectory) || fs.mkdirSync(dataDirectory, {
+    recursive: true
+  });
+  fs.writeFileSync(path.join(dataDirectory, "index.json"), JSON.stringify(index));
 }
 
 function error404(res) {

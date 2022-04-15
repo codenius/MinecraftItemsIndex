@@ -30,6 +30,8 @@ Use `node index.js update items` to update the items cache and `node index.js up
 
 To do both use `npm run update` or `node index.js update items itemsDetails`.
 
+Using `node index.js update index` updates only the search index but is usally not requiered because it's automatically done after updating the items cache.
+
 ## Resources
 - Item fetching (https://github.com/nicolo-rancan/minecraft-items-api, extended)
 - Navigation bar (https://www.cssscript.com/demo/header-navbar-templates/header-3.html, modified)
