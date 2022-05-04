@@ -10,75 +10,51 @@
 <body>
   <%- include("../partials/nav.html") %>
     <main>
-      <div id="sidebar">
-        <div id="image"><img src="https://minecraftitemids.com/item/128/stone.png" alt="item-image"></div>
-        <div id="basic-item-data"></div>
-      </div>
-      <div id="main">
-        <div id="item-name">Placeholder</div>
-        <div id="description">
-          <%= item.description %>
-        </div>
-        <div id="bars">
-          <table>
-            <thead>
-              <td>Property</td>
-              <td>Bar</td>
-              <td>Value</td>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Hardness</td>
-                <td>
-                  <div class="bar_wrapper">
-                    <div class="bar" data-percentage="<%= item.properties.hardness * 10 %>"></div>
-                  </div>
-                </td>
-                <td>
-                  <%= item.properties.hardness %>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+
+      <div id="heading">
+        <div id="image-wrapper"><div id="image"><img src="<%= item.image %>" alt="item-image"></div></div>
+      <div id="item-name">
+          <%= item.name %>
         </div>
       </div>
+      <div id="content">
+        <div id="basic-item-data">
+          <ul>
+            <li><%= item.properties.item_id %></li>
+            <li></li>
+          </ul>
+        </div>
+        <div id="main">
+          <div id="description">
+            <%= item.description %>
+          </div>
+          <div id="bars">
+            <table>
+              <thead>
+                <td>Property</td>
+                <td>Bar</td>
+                <td>Value</td>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Hardness</td>
+                  <td>
+                    <div class="bar_wrapper">
+                      <div class="bar" data-percentage="<%= item.properties.hardness * 10 %>"></div>
+                    </div>
+                  </td>
+                  <td>
+                    <%= item.properties.hardness %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
     </main>
 
-
-    <table>
-      <tbody>
-        <tr>
-          <td>
-            <div id="circle"></div>
-          </td>
-          <td>
-            <%= item.description %>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <table>
-      <thead>
-        <td>Property</td>
-        <td>Bar</td>
-        <td>Value</td>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Hardness</td>
-          <td>
-            <div class="bar_wrapper">
-              <div class="bar" data-percentage="<%= item.properties.hardness * 10 %>"></div>
-            </div>
-          </td>
-          <td>
-            <%= item.properties.hardness %>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    
     <%- include("../partials/footer.html") %>
 
 </body>
