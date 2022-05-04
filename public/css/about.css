@@ -1,0 +1,32 @@
+main {
+    padding: 1rem;
+}
+
+#about_the_page {
+    background-color: rgba(223, 223, 223, 0.363);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+#credits_category {
+    background-color: rgba(223, 223, 223, 0.363);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+main h1 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+main h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+main ul {
+    list-style: circle;
+    margin-left: 1rem;
+}
