@@ -9,6 +9,34 @@
 
 <body>
   <%- include("../partials/nav.html") %>
+  <main>
+    <div id="about_the_page">
+      <h1>About the page</h1>
+    </div>
+    <div id="credits_category">
+      <h2>Creators</h2>
+      <ul>
+      <li>codenius</li>
+      <li>sprinter12321</li>
+    </ul>
+    </div>
+    <div id="credits_category">
+      <h2>Resources</h2>
+      <ul>
+        <li><a href="https://github.com/nicolo-rancan/minecraft-items-api">Item fetching (https://github.com/nicolo-rancan/minecraft-items-api, extended)</a></li>
+        <li><a href="https://www.cssscript.com/demo/header-navbar-templates/header-3.html">Navigation bar (https://www.cssscript.com/demo/header-navbar-templates/header-3.html, modified)</a></li>
+      </ul>
+    </div>
+    <div id="credits_category">
+      <h2>Libraries and modules</h2>
+      <ul>
+        <li>express as web application framework</li>
+        <li>ejs as templating engine for express</li>
+        <li>lunr to search items</li>
+        <li>cheerio for webscrapping (get items data)</li>
+      </ul>
+    </div>
+  </main>
   <%- include("../partials/footer.html") %>
   
 </html>

@@ -81,6 +81,10 @@ app.get("/items/:name", async (req, res) => {
   }
 });
 
+app.get("/about", (req, res) => {
+  res.render("about.html")
+});
+
 app.get("/search", (req, res) => {
   let query = req.query.q;
   lunrEscapedCharacters.forEach((element) => {
