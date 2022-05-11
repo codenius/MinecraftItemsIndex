@@ -1,7 +1,41 @@
-table {
-    margin: 0 auto;
-    background-color: rgba(240, 248, 255, 0.74);
+main {
+    padding-top: 0.5rem;
+    background-color: #dfdfdf82;
     font-size: 1.5rem;
+}
+
+#items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form {
+    display: flex;
+}
+
+select {
+    height: 1.5rem;
+    background-color: transparent;
+    border-color: black;
+}
+
+#items-main {
+    margin-top: 0.5rem;
+    padding: 1rem 2rem;
+    border: 0.1rem black solid;
+}
+
+thead {
+    font-weight: 700;
+}
+
+tr {
+    border-bottom: 1px solid black;
+}
+
+tbody tr:last-child {
+    border: none;
 }
 
 table tbody tr td {
