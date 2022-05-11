@@ -3,18 +3,36 @@ main {
 }
 
 #about_the_page {
-    background-color: rgba(223, 223, 223, 0.363);
+    background-color: #dfdfdf82;
     border-radius: 1rem;
     padding: 1rem;
     margin-bottom: 1rem;
 }
 
 #credits_category {
-    background-color: rgba(223, 223, 223, 0.363);
+    background-color: #dfdfdf82;
     border-radius: 1rem;
     padding: 1rem;
     margin-bottom: 1rem;
 }
+
+#github_link a {
+    background-color: #dfdfdf82;
+    border-radius: 1rem;
+    padding: 1rem;
+    width: min-content;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+#github_link a img {
+    object-fit: scale-down;
+    height: 2rem;
+    margin: 0.5rem;
+}
+
 
 main h1 {
     font-size: 2rem;
