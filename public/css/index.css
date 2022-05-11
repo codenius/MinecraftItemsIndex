@@ -7,7 +7,7 @@ main>* {
 }
 
 #randomItems {
-    background-color: rgba(223, 223, 223, 0.363);
+    background-color: #dfdfdf82;
     border-radius: 1rem;
     padding: 1rem;
     display: flex;
@@ -57,7 +57,7 @@ table {
 #news {
     padding: 1rem;
     display: flex;
-    background-color: rgba(223, 223, 223, 0.363);
+    background-color: #dfdfdf82;
     border-radius: 1rem;
 }
 
