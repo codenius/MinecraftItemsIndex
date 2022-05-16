@@ -21,13 +21,17 @@ select {
 }
 
 #items-main {
-    margin-top: 0.5rem;
+    margin: 1rem;
     padding: 1rem 2rem;
     border: 0.1rem black solid;
 }
 
 thead {
     font-weight: 700;
+}
+
+tbody {
+    font-size: 1rem;
 }
 
 tr {
@@ -38,25 +42,31 @@ tbody tr:last-child {
     border: none;
 }
 
-table tbody tr td {
+table tr td {
     vertical-align: middle;
-    padding: 4px;
+    padding: 0.25rem;
+    text-align: center;
 }
 
 table tbody tr td a {
     margin: auto 0;
 }
 
-table tbody tr td:last-child {
-    font-size: 1rem;
+table tr td:last-child {
+    text-align: start;
+
 }
 
-picture {
-    height: 3rem;
-    width: 3rem;
+table tbody tr td:last-child {
+    word-break: break-word;
 }
 
 picture img {
-    display: block;
-    margin: auto;
+    height: 2rem;
+    width: 2rem;
+    object-fit: contain;
+}
+
+.bold {
+    font-weight: 700;
 }
