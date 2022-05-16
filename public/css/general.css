@@ -83,7 +83,7 @@ body {
     padding: 0.5rem;
     padding-top: 0.3rem;
     visibility: hidden;
-    max-height: 1000%;
+    max-height: 25vh;
     overflow-y: auto;
 }
 

@@ -28,8 +28,9 @@ async function search() {
     if (!results.length == 0) {
         document.getElementById("search_results").style.visibility = "visible";
         document.getElementById("search_results").innerHTML = "";
+        let search_results = ""
         results.forEach((element) => {
-            document.getElementById("search_results").innerHTML += `
+            search_results += `
             <li>
               <a href="/items/${element.simple_name}">
                 <picture><img src="${element.image}" alt=""></picture>
@@ -41,6 +42,7 @@ async function search() {
             </li>
         `
         });
+        document.getElementById("search_results").innerHTML = search_results
     } else {
         document.getElementById("search_results").style.visibility = "hidden";
     }
