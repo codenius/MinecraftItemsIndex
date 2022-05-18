@@ -12,37 +12,38 @@
 
     <main>
       <div id="randomItems">
-      <h2>Featured Items</h2>
-      <ul id="randomItemsList">
-        
-        <% items.forEach(element=> { %>
-          <li class="randomItem">
-            <a href="/items/<%= element.simple_name %>">
-              <div>
-                <img src="<%= element.image %>" alt="">
-              </div>
-              <div>
-                <%= element.name %>
-              </div>
-            </a>
-          </li>
-          <% }) %>
-      </ul>
-    </div>
+        <h2>Featured Items</h2>
+        <ul id="randomItemsList">
+
+          <% items.forEach(element=> { %>
+            <li class="randomItem">
+              <a href="/items/<%= element.simple_name %>">
+                <div>
+                  <img src="<%= element.image %>" alt="">
+                </div>
+                <div>
+                  <%= element.name %>
+                </div>
+              </a>
+            </li>
+            <% }) %>
+        </ul>
+      </div>
       <div id="news">
         <div id="mc_updates">
           <h1>Minecraft updates</h1>
-          <table><tr>
-            <td>Latest release:</td>
-            <td>1.18.2</td>
-          </tr>
-          <tr>
-            <td>Latest snapshot:</td>
-            <td>22w16b (1.19) <br>Combat Test 8c</td>
-          </tr>
-        </table>
-          
+          <table>
+            <tr>
+              <td>Latest release:</td>
+              <td>1.18.2</td>
+            </tr>
+            <tr>
+              <td>Latest snapshot:</td>
+              <td>22w16b (1.19) <br>Combat Test 8c</td>
+            </tr>
+          </table>
         </div>
+
         <div id="new_items">
           <h1>New items</h1>
           <ul>

@@ -21,7 +21,7 @@ main>* {
 }
 
 h2 {
-    
+
     font-size: 3rem;
     font-weight: bold;
 }
@@ -59,13 +59,11 @@ table {
     display: flex;
     background-color: #dfdfdf82;
     border-radius: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-#news #mc_updates {
-    border-right: 3px solid rgb(50, 50, 50);
-    width: 50%;
-}
-
-#news #new_items {
-    padding-left: 1rem;
+#news>* {
+    flex-basis: 50%;
 }
