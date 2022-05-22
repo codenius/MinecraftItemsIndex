@@ -33,7 +33,7 @@ async function search() {
             search_results += `
             <li>
               <a href="/items/${element.simple_name}">
-                <picture><img src="${element.image}" alt=""></picture>
+                <picture><img src="${element.image != "N/A" ? element.image : "/img/barrier.png"}" alt=""></picture>
                 <span>
                   <div>${element.name}</div>
                   <div><span>${element.id}</span><span>&#124;</span><span>${element.numerical_id}</span></div>

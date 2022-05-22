@@ -13,6 +13,7 @@
 
       <div id="heading">
         <div id="image-wrapper">
+            <% item.image != "N/A" ? item.image : item.image = "/img/barrier.png" %>
           <div id="image"><img src="<%= item.image %>" alt="item-image"></div>
         </div>
         <div id="item-name">

@@ -93,15 +93,16 @@ body {
 }
 
 #search_results>li>a>picture {
-    min-width: 3rem;
-    min-height: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0.3rem;
 }
 
 #search_results>li>a>picture>img {
-    width: max-content;
+    height: 1.8rem;
+    aspect-ratio: 1/1;
+    object-fit: scale-down;
 }
 
 #search_results>li>a>span {

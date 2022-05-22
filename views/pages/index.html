@@ -19,6 +19,7 @@
             <li class="randomItem">
               <a href="/items/<%= element.simple_name %>">
                 <div>
+                  <% element.image != "N/A" ? element.image : element.image = "/img/barrier.png" %>
                   <img src="<%= element.image %>" alt="">
                 </div>
                 <div>

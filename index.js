@@ -134,7 +134,7 @@ async function getItemDetails(endpoint) {
   let name = dom(".breadcrumb-item.active").text().trim();
   let image = dom(".item-infobox > img").attr("src") || "";
   image = image.replace("64", "128");
-  image = `https://minecraftitemids.com${image}`
+  image ? image = `https://minecraftitemids.com${image}` : image = "N/A"
 
   let description = dom(".card-body.item-card-body > :nth-child(1) > p").text().trim();
 
