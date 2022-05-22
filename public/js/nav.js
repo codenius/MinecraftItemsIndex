@@ -17,23 +17,23 @@ document.addEventListener("DOMContentLoaded", () => {
     navWrapper.classList.remove("active");
     hamburger.classList.remove("hamburger-active");
     searchForm.classList.toggle("active");
-    searchForm.classList.contains("active") ? searchInput.focus() : searchInput.blur()
+    searchForm.classList.contains("active") ? setTimeout(() => { searchInput.focus() }, 100) : searchInput.blur()
   });
 
   searchForm.addEventListener("focusout", (event) => {
     if (!searchForm.contains(event.relatedTarget)) {
-      searchResults.style.visibility = "hidden";
+      searchResults.classList.remove("active")
     }
   });
 
   searchInput.addEventListener("focus", () => {
     if (searchResults.innerHTML.trim()) {
-      searchResults.style.visibility = "visible";
+      searchResults.classList.add("active")
     }
   });
 
   searchInput.addEventListener("search", () => {
+    searchResults.classList.remove("active")
     searchResults.innerHTML = "";
-    searchResults.style.visibility = "hidden";
   });
 })

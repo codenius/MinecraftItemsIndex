@@ -3,7 +3,7 @@ var doneTypingInterval = 1000;
 
 document.addEventListener("DOMContentLoaded", () => {
     // document.getElementById("search").addEventListener("input", search); // needs to much resources
-    // document.getElementById("search").addEventListener("input", () => { document.getElementById("search_results").style.visibility = "hidden" }); // clear search results while typing
+    // document.getElementById("search").addEventListener("input", () => { document.getElementById("search_results").classList.remove("active") }); // clear search results while typing
     document.getElementById("search").addEventListener("keyup", () => {
         clearTimeout(typingTimer);
         typingTimer = setTimeout(search, doneTypingInterval);
@@ -26,7 +26,6 @@ async function search() {
         var results = []
     }
     if (!results.length == 0) {
-        document.getElementById("search_results").style.visibility = "visible";
         document.getElementById("search_results").innerHTML = "";
         let search_results = ""
         results.forEach((element) => {
@@ -36,14 +35,15 @@ async function search() {
                 <picture><img src="${element.image != "N/A" ? element.image : "/img/barrier.png"}" alt=""></picture>
                 <span>
                   <div>${element.name}</div>
-                  <div><span>${element.id}</span><span>&#124;</span><span>${element.numerical_id}</span></div>
+                  <div><span>${element.id}</span><span>${element.numerical_id}</span></div>
                 </span>
               </a>
             </li>
         `
         });
         document.getElementById("search_results").innerHTML = search_results
+        document.getElementById("search_results").classList.add("active");
     } else {
-        document.getElementById("search_results").style.visibility = "hidden";
+        document.getElementById("search_results").classList.remove("active");
     }
 };
