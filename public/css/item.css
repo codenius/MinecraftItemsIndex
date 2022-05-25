@@ -26,12 +26,28 @@ table tbody tr td a {
 .bar {
     width: 0%;
     height: 100%;
-    transition: all 1s ease;
     /* cubic-bezier(0.18, 0.89, 0.32, 1.28) */
-    background-color: lightblue;
     margin: 0;
     padding: 0;
     border-radius: 10em;
+}
+
+.bar_inner {
+    animation: bar 1s ease 0s both;
+    background-color: lightblue;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border-radius: 10em;
+}
+
+@keyframes bar {
+    from {
+        width: 0
+    }
+    to {
+        width: 100%
+    }
 }
 
 body {

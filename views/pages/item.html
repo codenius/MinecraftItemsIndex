@@ -63,8 +63,10 @@
                 <tr>
                   <td>Hardness</td>
                   <td>
-                    <div class="bar_wrapper">
-                      <div class="bar" data-percentage="<%= item.properties.hardness * 10 %>"></div>
+                    <div class="bar_wrapper"> <!-- wrappes the hole bar -->
+                      <div class="bar" style="width: <%= item.properties.hardness * 10 %>%"> <!-- declairs width of bar -->
+                        <div class="bar_inner"></div> <!-- sets width with animation to 100% -->
+                      </div>
                     </div>
                   </td>
                   <td>
