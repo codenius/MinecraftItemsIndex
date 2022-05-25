@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<% function check(value) {
+  return value || "–"
+} %>  
+
 <head>
   <%- include("../partials/head.html") %>
     <link rel="stylesheet" href="/css/item.css">
     <script src="/js/item.js"></script>
+    <title><%= item.name %> - MII</title>
 </head>
 
 <body>
@@ -27,18 +32,18 @@
               <tr>
                 <td>ID:</td>
                 <td>
-                  <%= item.properties.item_id %>
+                  <%= check(item.properties.item_id) %>
                 </td>
               </tr>
               <tr>
                 <td>Numeric ID:</td>
                 <td>
-                  <%= item.properties.numerical_id %>
+                  <%= check(item.properties.numerical_id) %>
                 </td>
               </tr>
               <tr>
                 <td>Material:</td>
-                <td><%= item.properties.material %> </td>
+                <td><%= check(item.properties.material) %> </td>
               </tr>
             </table>
           </div>
