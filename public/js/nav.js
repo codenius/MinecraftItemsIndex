@@ -27,7 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
     __tempEl__.style.position = 'absolute';
     __tempEl__.style.top = getOffset(el).top + 'px';
     __tempEl__.style.left = getOffset(el).left + 'px';
-    __tempEl__.style.height = 0
+    __tempEl__.style.width = 0;
+    __tempEl__.style.height = 0;
     __tempEl__.style.opacity = 0;
     // Put this temp element as a child of the page <body> and focus on it
     document.body.appendChild(__tempEl__);
