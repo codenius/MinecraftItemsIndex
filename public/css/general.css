@@ -39,7 +39,7 @@ a {
 /* Background */
 
 body {
-    background-image: url("../img/background.jpg");
+    background-image: url("../img/background.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -52,7 +52,7 @@ body {
     @supports (-webkit-appearance: none) {
         body::before {
             content: '';
-            background-image: url("../img/background.jpg");
+            background-image: url("../img/background.png");
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
