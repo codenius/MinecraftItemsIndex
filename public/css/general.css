@@ -118,7 +118,7 @@ body {
     align-items: center;
 }
 
-#search_results li:hover {
+#search_results li:hover, #search_results li.highlight {
     background-color: rgb(0, 0, 0, 10%);
 }
 
