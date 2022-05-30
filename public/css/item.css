@@ -1,25 +1,147 @@
-/* table {
-    margin: 0 auto;
-    background-color: rgba(240, 248, 255, 0.74);
+:root {
+    --black: #222222;
+    --white: #f2f2f2;
+    --grey: #dddddd;
+    --lightblue: #add8e6;
+    --darkgrey: #7b7b7b;
 
 }
 
-table tbody tr td {
+body {
+    background: var(--white);
+}
+
+body:before { /* neccesarry to revoke iOS background workaround for this page */
+    background: none;
+}
+
+main {
+    margin: 1rem;
+}
+
+#heading,
+#content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#heading {
+    align-items: center;
+}
+
+#item-name {
+    font-size: 5rem;
+    word-break: break-word;
+    color: var(--black);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#item-name::after {
+    content: '';
+    background-color: var(--black);
+    height: 0.3rem;
+    width: 100%;
+    border-radius: 100rem;
+    display: block;
+    margin-top: 0.4rem;
+    /* prevent glitches for letters like g */
+}
+
+#basic-item-data,
+#image-wrapper {
+    flex-basis: 25%;
+    flex-shrink: 0;
+    flex-grow: 2;
+}
+
+#item-name,
+#main {
+    flex-basis: 75%;
+    flex-grow: 1;
+}
+
+#basic-item-data,
+#image-wrapper,
+#item-name,
+#main {
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+}
+
+#image-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+#image {
+    --size: 15rem;
+    height: var(--size);
+    width: var(--size);
+    background-color: var(--grey);
+    border-radius: var(--size);
+    padding: calc(var(--size)/5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#image img {
+    height: 100%;
+    width: 100%;
+}
+
+#basic-item-data {
+    min-width: 15em;
+}
+
+#basic-item-data>* {
+    background: var(--grey);
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 100%;
+}
+
+#basic-item-data td:last-child {
+    word-break: break-word;
     vertical-align: middle;
-    padding: 4px;
 }
 
-table tbody tr td a {
-    margin: auto 0;
-} */
+#basic-item-data td:first-child::after {
+    content: ' ';
+    white-space: pre;
+}
+
+#description {
+    margin-bottom: 1rem;
+}
+
+#bars table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+#bars thead {
+    font-weight: 700;
+    border-bottom: solid 0.1rem var(--darkgrey);
+}
+
+#bars td {
+    padding: 0.2rem;
+    vertical-align: middle;
+}
+
+/* BAR STYLES */
 
 .bar_wrapper {
-    width: 10rem;
-    height: 1rem;
+    width: 100%;
+    height: 0.5rem;
     /* border: solid 0.05rem;
     padding: 0.1rem; */
     border-radius: 10rem;
-    background: #efebeb;
+    background: var(--grey);
     overflow: hidden;
 }
 
@@ -34,7 +156,7 @@ table tbody tr td a {
 
 .bar_inner {
     animation: bar 1s ease 0s both;
-    background-color: lightblue;
+    background-color: var(--lightblue);
     height: 100%;
     margin: 0;
     padding: 0;
@@ -45,88 +167,8 @@ table tbody tr td a {
     from {
         width: 0
     }
+
     to {
         width: 100%
     }
-}
-
-body {
-    background: #f2f2f2;
-}
-
-main {
-    margin: 1rem;
-}
-
-#heading, #content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
-
-#item-name {
-    font-size: 5rem;
-    color: #b3b3b3;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-#item-name::after {
-    content: '';
-    background-color: #b3b3b3;
-    height: 0.8rem;
-    width: 100%;
-    border-radius: 100rem;
-    display: block;
-}
-
-#basic-item-data, #image-wrapper {
-    flex-basis: 25%;
-    flex-shrink: 0;
-    flex-grow: 2;
-}
-
-#item-name, #main {
-    flex-basis: 75%;
-    flex-grow: 1;
-}
-
-#basic-item-data, #image-wrapper, #item-name, #main {
-    padding: 0 1rem;
-    margin-bottom: 1rem;
-}
-
-#image-wrapper {
-    display: flex;
-    justify-content: center;
-}
-
-#image {
-    --size: 15rem;
-    height: var(--size);
-    width: var(--size);
-    background-color: #dddddd;
-    border-radius: var(--size);
-    padding: calc(var(--size)/5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#image img {
-    height: 100%;
-    width: 100%;
-}
-
-#basic-item-data > * {
-    background: #dddddd;
-    padding: 1rem;
-    border-radius: 1rem;
-    width: 100%;
-}
-
-#basic-item-data td:first-child::after {
-    content: ' ';
-    white-space: pre;
 }
