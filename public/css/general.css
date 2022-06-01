@@ -39,6 +39,7 @@ footer a:hover {
 
 a {
     text-decoration: none;
+    text-decoration-color: transparent;
     color: inherit;
     transition: all 0.2s;
 }
