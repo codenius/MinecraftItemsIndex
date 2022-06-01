@@ -2,6 +2,8 @@ main {
     padding-top: 0.5rem;
     background-color: #dfdfdf82;
     font-size: 1.5rem;
+    width: 100%;
+    max-width: unset;
 }
 
 #items {
