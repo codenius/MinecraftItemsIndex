@@ -13,107 +13,90 @@
 
 <body>
   <%- include("../partials/nav.html") %>
-    <main>
-      <!--     {
-        "simple_name": "stone",
-        "name": "Stone",
-        "image": "https://minecraftitemids.com/item/128/stone.png",
-        "description": "Stone, not to be confused with cobblestone, can only be obtained when a stoneblock is broken with a silk touch pickaxe. It is required for many redstone items such as the comparator, and decorative items like stonebricks.",
-        "properties": {
-            "item_id": "minecraft:stone",
-            "numerical_id": "1",
-            "stackable": "Yes",
-            "max_stack_size": "64",
-            "recipes_used_in": "Stone Slab, Stone Pressure Plate, Stone Button, Stone Bricks, Redstone Repeater, Redstone Comparator, Stone Stairs, Stonecutter",
-            "hardness": "1.5",
-            "material": "Rock",
-            "diggable": "Yes",
-            "min_/_max_state_ids": "1 - 1"
-        }
-    } -->
-      <div id="heading">
-        <div id="image-wrapper">
-            <% item.image != "N/A" ? item.image : item.image = "/img/barrier.png" %>
-          <div id="image"><img src="<%= item.image %>" alt="<%= item.name %> "></div>
-        </div>
-        <div id="item-name">
-          <%= item.name %>
+
+  <main>
+    <div id="heading">
+      <div id="image-wrapper">
+          <% item.image != "N/A" ? item.image : item.image = "/img/barrier.png" %>
+        <div id="image"><img src="<%= item.image %>" alt="<%= item.name %> "></div>
+      </div>
+      <div id="item-name">
+        <%= item.name %>
+      </div>
+    </div>
+    <div id="content">
+      <div id="basic-item-data">
+        <div class="basic-item-data__wrapper">
+          <table>
+            <tr>
+              <td>ID:</td>
+              <td>
+                <%= check(item.properties.item_id) %>
+              </td>
+            </tr>
+            <tr>
+              <td>Numeric ID:</td>
+              <td>
+                <%= check(item.properties.numerical_id) %>
+              </td>
+            </tr>
+            <tr>
+              <td>Material:</td>
+              <td><%= check(item.properties.material) %> </td>
+            </tr>
+            <tr>
+              <td>Diggable:</td>
+              <td><%= check(item.properties.diggable) %> </td>
+            </tr>            
+          </table>
         </div>
       </div>
-      <div id="content">
-        <div id="basic-item-data">
-          <div class="basic-item-data__wrapper">
-            <table>
+      <div id="main">
+        <div id="description">
+          <%= item.description %>
+        </div>
+        <div id="bars">
+          <table>
+            <thead>
+              <td>Property</td>
+              <td>Bar</td>
+              <td>Value</td>
+            </thead>
+            <tbody>
               <tr>
-                <td>ID:</td>
+                <td>Hardness</td>
                 <td>
-                  <%= check(item.properties.item_id) %>
+                  <div class="bar_wrapper"> <!-- wrappes the hole bar -->
+                    <div class="bar" style="width: <%= item.properties.hardness * 10 %>%"> <!-- declairs width of bar -->
+                      <div class="bar_inner"></div> <!-- sets width with animation to 100% -->
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <%= check(item.properties.hardness) %>
                 </td>
               </tr>
               <tr>
-                <td>Numeric ID:</td>
+                <td>Maximal stack size</td>
                 <td>
-                  <%= check(item.properties.numerical_id) %>
+                  <div class="bar_wrapper"> <!-- wrappes the hole bar -->
+                    <div class="bar" style="width: <%= item.properties.max_stack_size * (100 / 64) %>%"> <!-- declairs width of bar -->
+                      <div class="bar_inner"></div> <!-- sets width with animation to 100% -->
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <%= check(item.properties.max_stack_size) %>
                 </td>
               </tr>
-              <tr>
-                <td>Material:</td>
-                <td><%= check(item.properties.material) %> </td>
-              </tr>
-              <tr>
-                <td>Diggable:</td>
-                <td><%= check(item.properties.diggable) %> </td>
-              </tr>            
-            </table>
-          </div>
-        </div>
-        <div id="main">
-          <div id="description">
-            <%= item.description %>
-          </div>
-          <div id="bars">
-            <table>
-              <thead>
-                <td>Property</td>
-                <td>Bar</td>
-                <td>Value</td>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Hardness</td>
-                  <td>
-                    <div class="bar_wrapper"> <!-- wrappes the hole bar -->
-                      <div class="bar" style="width: <%= item.properties.hardness * 10 %>%"> <!-- declairs width of bar -->
-                        <div class="bar_inner"></div> <!-- sets width with animation to 100% -->
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <%= check(item.properties.hardness) %>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Maximal stack size</td>
-                  <td>
-                    <div class="bar_wrapper"> <!-- wrappes the hole bar -->
-                      <div class="bar" style="width: <%= item.properties.max_stack_size * (100 / 64) %>%"> <!-- declairs width of bar -->
-                        <div class="bar_inner"></div> <!-- sets width with animation to 100% -->
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <%= check(item.properties.max_stack_size) %>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+            </tbody>
+          </table>
         </div>
       </div>
+    </div>
+  </main>
 
-    </main>
-
-    <%- include("../partials/footer.html") %>
+  <%- include("../partials/footer.html") %>
 
 </body>
 
