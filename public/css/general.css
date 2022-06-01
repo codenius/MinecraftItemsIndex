@@ -40,6 +40,13 @@ footer a:hover {
 a {
     text-decoration: none;
     color: inherit;
+    transition: all 0.2s;
+}
+
+main a:hover {
+    --grey: #4d4d4d;
+    text-decoration-color: var(--grey);
+    color: var(--grey);
 }
 
 /* Background */

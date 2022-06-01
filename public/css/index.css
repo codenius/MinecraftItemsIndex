@@ -67,3 +67,7 @@ table {
 #news>* {
     flex-basis: 50%;
 }
+
+main a:hover {
+    transform: scale(1.05);
+}

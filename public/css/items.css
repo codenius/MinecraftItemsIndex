@@ -72,3 +72,7 @@ picture img {
 .bold {
     font-weight: 700;
 }
+
+main a:hover {
+    text-decoration: underline;
+}
