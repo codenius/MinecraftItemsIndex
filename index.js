@@ -6,12 +6,9 @@ const lunr = require("lunr");
 const path = require("path");
 const cliProgress = require("cli-progress");
 
-// change working directory to directory of this file for correct paths
-process.chdir(__dirname);
-
 require("dotenv").config();
 const port = process.env.port || 3000;
-const dataDirectory = process.env.dataDirectory || "./data";
+const dataDirectory = path.join(__dirname, process.env.dataDirectory || "./data");
 const lunrEscapedCharacters = [":", "+", "-", "^", "~"];
 const args = process.argv.slice(2);
 
@@ -40,8 +37,8 @@ const app = express();
 
 app.engine('.html', require('ejs').__express)
 app.set('view engine', 'ejs')
-app.set('views', './views/pages')
-app.use('/', express.static('./public')) // serve css, js and images
+app.set('views', path.join(__dirname ,'./views/pages'))
+app.use('/', express.static(path.join(__dirname ,'./public'))) // serve css, js and images
 
 // *** Routes ***
 
