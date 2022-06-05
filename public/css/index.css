@@ -71,3 +71,49 @@ table {
 main a:hover {
     transform: scale(1.05);
 }
+
+.notificationBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #def7ff;
+    width: 100%;
+    padding-block: 0;
+    padding-inline: 1rem;
+    text-align: center;
+    border: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    height: 0;
+}
+
+.notificationBox.active {
+    visibility: visible;
+    opacity: 1;
+    height: initial;
+    padding: 1rem;
+    border-bottom: 0.01rem grey solid;
+}
+
+.notificationBox .closeButton {
+    margin: 0.1rem;
+    padding: 0.8rem;
+    border: solid grey 0.01rem;
+    background-color: rgba(0,0,0,0.15);
+    border-radius: 100rem;
+    width: 1rem;
+    height: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.notificationBox .closeButton:hover {
+  background-color: rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+.notificationBox .notificationContent {
+    flex-grow: 2;
+}

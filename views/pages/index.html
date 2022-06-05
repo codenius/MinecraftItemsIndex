@@ -2,8 +2,12 @@
 <html lang="en">
 
 <head>
-  <%- include("../partials/head.html") %>
+    <%- include("../partials/head.html") %>
     <link rel="stylesheet" href="/css/index.css">
+    <script src="/js/index.js" defer></script>
+    <% if (not_found) { %>
+    <script defer>document.addEventListener("DOMContentLoaded", () => { not_found() })</script>
+    <% } %>
     <title>MII - Home</title>
 </head>
 

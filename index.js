@@ -45,12 +45,7 @@ app.use('/', express.static('./public')) // serve css, js and images
 
 // *** Routes ***
 
-app.get("/", (req, res) => {
-  let randomItems = itemsDetails.slice().sort(() => Math.random() - Math.random()).slice(0, 5);
-  res.render("index.html", {
-    items: randomItems
-  })
-})
+app.get("/", startPage)
 
 app.get("/items", (req, res) => {
   let rawItems = items.slice()
@@ -77,7 +72,7 @@ app.get("/items/:name", async (req, res) => {
       item: infos
     })
   } else {
-    error404(res)
+    error404(req, res)
   }
 });
 
@@ -99,10 +94,19 @@ app.get("/search", (req, res) => {
 
 // Error route
 app.use((req, res, next) => {
-  error404(res);
+  error404(req, res, next);
 });
 
 // *** Functions ***
+
+
+function startPage(req, res, next, not_found = false) {
+  let randomItems = itemsDetails.slice().sort(() => Math.random() - Math.random()).slice(0, 5);
+  res.render("index.html", {
+    items: randomItems,
+    not_found: not_found
+  })
+}
 
 function indexItems() {
   index = lunr(function () {
@@ -122,8 +126,8 @@ function indexItems() {
   fs.writeFileSync(path.join(dataDirectory, "index.json"), JSON.stringify(index));
 }
 
-function error404(res) {
-  res.status(404).send('Sorry, cant find that!');
+function error404(req, res, next) {
+  startPage(req, res, next, true)
 }
 
 async function getItemDetails(endpoint) {

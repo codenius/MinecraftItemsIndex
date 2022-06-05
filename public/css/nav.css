@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   background-color: #def7ff;
-  box-shadow: 0 -1.5rem 1rem 1rem black;
+  box-shadow: 0 0.2rem 0.5rem -0.2rem black;
 }
 
 .site-header__wrapper {
