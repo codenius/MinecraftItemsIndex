@@ -17,5 +17,5 @@ function not_found() {
     })
     notificationBox.append(closeButton)
 
-    document.body.prepend(notificationBox)
+    document.querySelector("header").prepend(notificationBox)
 }
