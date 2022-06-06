@@ -76,7 +76,7 @@ main a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #def7ff;
+    background: #ff4a4a;
     width: 100%;
     padding-block: 0;
     padding-inline: 1rem;
