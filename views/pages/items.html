@@ -41,20 +41,26 @@
                 <tr>
                   <% if (order=="alphabetic" ) {%>
                     <td class="bold">
-                      <% if (prevLetter !=element.name[0]) { %>
-                        <%= element.name[0]; %>
-                          <% }; prevLetter=element.name[0]; %>
+                      <a href="/items/<%= element.simple_name %>">
+                        <% if (prevLetter !=element.name[0]) { %>
+                          <%= element.name[0]; %>
+                            <% }; prevLetter=element.name[0]; %>
+                      </a>
                     </td>
                     <% } else { let numerical_id=element.numerical_id.split(":");%>
                       <td class="bold">
-                        <% if (prevLetter!=numerical_id[0]) { %>
-                          <% if (numerical_id[0]=="N/A" ) { numerical_id[0]="" } %>
-                            <%= numerical_id[0]; %>
-                              <% }; prevLetter=numerical_id[0]; %>
+                        <a href="/items/<%= element.simple_name %>">
+                          <% if (prevLetter!=numerical_id[0]) { %>
+                            <% if (numerical_id[0]=="N/A" ) { numerical_id[0]="" } %>
+                              <%= numerical_id[0]; %>
+                                <% }; prevLetter=numerical_id[0]; %>
+                        </a>
                       </td>
                       <td class="bold">
-                        <% if (numerical_id[1]) { var numerical_id_output=":" + numerical_id[1] } %>
-                          <%= ( numerical_id_output || "" ) %>
+                        <a href="/items/<%= element.simple_name %>">
+                          <% if (numerical_id[1]) { var numerical_id_output=":" + numerical_id[1] } %>
+                            <%= ( numerical_id_output || "" ) %>
+                        </a>
                       </td>
                       <% } %>
                         <td>
