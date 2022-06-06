@@ -28,6 +28,10 @@ select {
     border: 0.1rem black solid;
 }
 
+table {
+  height: 100%;
+}
+
 thead {
     font-weight: 700;
 }
@@ -38,7 +42,6 @@ tbody {
 
 tr {
     border-bottom: 1px solid black;
-    height: 100%;
 }
 
 tbody tr:last-child {
@@ -49,7 +52,6 @@ table tr td {
     vertical-align: middle;
     padding: 0.25rem;
     text-align: center;
-    height: 100%;
 }
 
 table tbody tr td a {
